@@ -60,28 +60,28 @@ def xicor(x: npt.NDArray[float], y: npt.NDArray[float]) -> dict:
 # Auxiliary functions #########################
 ###############################################
 
-def _check_inputs(x: np.ndarray, y: np.ndarray) -> None:
+def _check_inputs(x: npt.NDArray[float], y: npt.NDArray[float]) -> None:
     if len(x) != len(y):
         raise ValueError('the two arrays have different lengths: ' +
                          str(len(x)) + ' vs ' + str(len(y)))
 
 
-def _get_rank(z: np.ndarray) -> np.ndarray:
+def _get_rank(z: npt.NDArray[float]) -> npt.NDArray[int]:
     temp = np.argsort(z)
     ranks = np.empty_like(temp)
     ranks[temp] = 1 + np.arange(len(z))
     return ranks
 
 
-def _get_anti_rank(rank_y: np.ndarray) -> np.ndarray:
+def _get_anti_rank(rank_y: npt.NDArray[int]) -> npt.NDArray[int]:
     return len(rank_y) - rank_y + 1
 
 
-def _get_numerator(rank_y: np.ndarray) -> np.ndarray:
+def _get_numerator(rank_y: npt.NDArray[int]) -> float:
     return len(rank_y) * np.sum([np.abs(r_next - r) for r_next, r in zip(rank_y[1:], rank_y[:-1])])
 
 
-def _get_denominator(antirank_y: np.ndarray) -> np.ndarray:
+def _get_denominator(antirank_y: npt.NDArray[int]) -> float:
     return 2 * np.sum(antirank_y * (len(antirank_y) - antirank_y))
 
 

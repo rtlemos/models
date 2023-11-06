@@ -14817,7 +14817,7 @@ Rs(x, y) = SignificanceResult(statistic=-0.00012064583207025048, pvalue=0.996958
 
 </div>
 
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14826,6 +14826,8 @@ Rs(x, y) = SignificanceResult(statistic=-0.00012064583207025048, pvalue=0.996958
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># let us now add noise to y and see what happens to XICOR</span>
+
+<span class="c1"># some auxiliary functions</span>
 
 <span class="k">def</span> <span class="nf">add_noise_to_y</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sd</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">sd</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
@@ -14841,6 +14843,22 @@ Rs(x, y) = SignificanceResult(statistic=-0.00012064583207025048, pvalue=0.996958
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'noise_sd'</span><span class="p">:</span> <span class="n">sd</span><span class="p">,</span>
                          <span class="s1">' '</span><span class="p">:</span> <span class="p">[</span><span class="s1">'statistic'</span><span class="p">,</span> <span class="s1">'pvalue'</span><span class="p">],</span>
                          <span class="s1">'value'</span><span class="p">:</span> <span class="p">[</span><span class="n">avg_statistic</span><span class="p">,</span> <span class="n">avg_pvalue</span><span class="p">]})</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># As the noise increases, XICOR converges to zero</span>
 
 <span class="n">noise_sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">noise_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">get_stats</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'x'</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">'y'</span><span class="p">],</span> <span class="n">sd</span><span class="p">)</span>
@@ -14885,7 +14903,7 @@ class="
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
 
@@ -14905,7 +14923,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># When noise_sd = 1, we still discern the effect of x on y</span>
@@ -14950,7 +14968,7 @@ class="
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 
 
 
@@ -14970,7 +14988,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># In contrast, when noise_sd=10, R ~ 0 (possibly negative)</span>
@@ -15017,7 +15035,7 @@ class="
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
